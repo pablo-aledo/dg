@@ -40,7 +40,7 @@ public:
     const ContainerT& successors() const { return nextBBs; }
     const ContainerT& predecessors() const { return prevBBs; }
     const ContainerT& controlDependence() const { return controlDeps; }
-    const ContainerT& RevControlDependence() const { return revControlDeps; }
+    const ContainerT& revControlDependence() const { return revControlDeps; }
 
     // similary to nodes, basic blocks can have keys
     // they are not stored anywhere, it is more due to debugging
