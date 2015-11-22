@@ -7,22 +7,26 @@ add_library(llvmdg SHARED
 	Node.h
 	DependenceGraph.h
 	ADT/DGContainer.h
+	analysis/PSS.cpp
+	analysis/PSS.h
+	analysis/Pointer.cpp
+	analysis/Pointer.h
 	llvm/LLVMNode.h
 	llvm/LLVMNode.cpp
 	llvm/LLVMDependenceGraph.h
 	llvm/LLVMDependenceGraph.cpp
 	llvm/LLVMDGVerifier.h
 	llvm/LLVMDGVerifier.cpp
-	llvm/AnalysisGeneric.h
-	llvm/AnalysisGeneric.cpp
-	llvm/PointsTo.h
-	llvm/PointsTo.cpp
-	llvm/DefUse.h
-	llvm/DefUse.cpp
-	llvm/DefMap.h
-	llvm/DefMap.cpp
-	llvm/ReachingDefs.h
-	llvm/ReachingDefs.cpp
+	#llvm/AnalysisGeneric.h
+	#llvm/AnalysisGeneric.cpp
+	#llvm/PointsTo.h
+	#llvm/PointsTo.cpp
+	#llvm/DefUse.h
+	#llvm/DefUse.cpp
+	#llvm/DefMap.h
+	#llvm/DefMap.cpp
+	#llvm/ReachingDefs.h
+	#llvm/ReachingDefs.cpp
 	llvm/Slicer.h
 )
 

@@ -15,60 +15,6 @@ using namespace llvm;
 namespace dg {
 namespace analysis {
 
-// we assume that if the program uses inttoptr, it access this
-// memory only this way - so every access to this memory is done
-// via some inttoptr. Here we store the inttoptr objects
-static std::map<uint64_t, LLVMNode *> intToPtrMap;
-
-// pointer points to unknown memory location
-// we don't know the size of unknown memory location
-MemoryObj UnknownMemoryObject(nullptr, ~((uint64_t) 0));
-// dereferencing null pointer is undefined behaviour,
-// so it's nice to keep track of that - again we can
-// write to null with any offset
-MemoryObj NullMemoryObject(nullptr,  ~((uint64_t) 0));
-// unknown pointer value
-Pointer UnknownMemoryLocation(&UnknownMemoryObject, 0);
-Pointer NullPointer(&NullMemoryObject, 0);
-
-bool Pointer::isUnknown() const
-{
-    return this == &UnknownMemoryLocation;
-}
-
-bool Pointer::isNull() const
-{
-    return obj->isNull();
-}
-
-bool Pointer::pointsToUnknown() const
-{
-    assert(obj && "Pointer has not any memory object set");
-    return obj->isUnknown();
-}
-
-bool Pointer::isKnown() const
-{
-    return !isUnknown() && !pointsToUnknown() &&!isNull();
-}
-
-bool Pointer::pointsToHeap() const
-{
-    assert(obj && "Pointer has not any memory object set");
-    // XXX what about unknown pointers?
-    return obj->isHeapAllocated();
-}
-
-bool MemoryObj::isNull() const
-{
-    return this == &NullMemoryObject;
-}
-
-bool MemoryObj::isUnknown() const
-{
-    return this == &UnknownMemoryObject;
-}
-
 static LLVMNode *createNodeWithMemAlloc(const Value *val)
 {
     LLVMNode *n = new LLVMNode(val);

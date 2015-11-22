@@ -19,6 +19,7 @@
 
 #include "LLVMNode.h"
 #include "AnalysisGeneric.h"
+#include "analysis/Pointer.h"
 #include "LLVMDependenceGraph.h"
 
 using llvm::errs;
@@ -31,7 +32,6 @@ LLVMNode::~LLVMNode()
     if (owns_key)
         delete getKey();
 
-    delete memoryobj;
     delete[] operands;
 }
 
@@ -47,6 +47,7 @@ static void dumpPointer(const Pointer& ptr)
     else if (ptr.isUnknown() || ptr.pointsToUnknown())
         errs() << "unknown + ";
     else {
+    /*
         LLVMNode *n = ptr.obj->node;
         const llvm::Value *v = n->getValue();
         if (llvm::isa<llvm::Function>(v))
@@ -55,6 +56,7 @@ static void dumpPointer(const Pointer& ptr)
             errs() << *v;
 
         errs() << " + ";
+        */
     }
 
     if (ptr.offset.isUnknown())
@@ -65,11 +67,13 @@ static void dumpPointer(const Pointer& ptr)
 
 void LLVMNode::dumpPointsTo() const
 {
+/*
     for (const Pointer& ptr : pointsTo) {
         errs() << "  -> ";
         dumpPointer(ptr);
         errs() << "\n";
     }
+*/
 }
 
 void LLVMNode::dumpAll() const
